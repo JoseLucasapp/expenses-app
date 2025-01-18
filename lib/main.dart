@@ -17,7 +17,8 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Despesas pessoais'),
         ),
-        body: Column(children: [
+        body: SingleChildScrollView(
+            child: Column(children: [
           Container(
             width: 250,
             height: 50,
@@ -38,6 +39,6 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           TransactionUser(),
-        ]));
+        ])));
   }
 }
