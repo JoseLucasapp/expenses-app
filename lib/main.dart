@@ -26,6 +26,16 @@ class ExpensesApp extends StatelessWidget {
           primary: Colors.purple,
           secondary: Colors.amber,
         ),
+        textTheme: ThemeData.light().textTheme.copyWith(
+              titleLarge: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              labelLarge: TextStyle(
+                color: Colors.white,
+              ),
+            ),
       ),
     );
   }
@@ -52,6 +62,30 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 211.30,
       date: DateTime.now().subtract(Duration(days: 4)),
     ),
+    Transaction(
+      id: 't4',
+      title: 'Novo Tênis de Corrida',
+      amount: 310.76,
+      date: DateTime.now().subtract(Duration(days: 2)),
+    ),
+    Transaction(
+      id: 't5',
+      title: 'Conta de Luz',
+      amount: 211.30,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
+    Transaction(
+      id: 't7',
+      title: 'Novo Tênis de Corrida',
+      amount: 310.76,
+      date: DateTime.now().subtract(Duration(days: 2)),
+    ),
+    Transaction(
+      id: 't6',
+      title: 'Conta de Luz',
+      amount: 211.30,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
   ];
 
   List<Transaction> get _recentTransactions {
@@ -61,12 +95,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       amount: value,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
@@ -74,6 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((transaction) => transaction.id == id);
+    });
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -102,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_transactions),
+            TransactionList(_transactions, _removeTransaction),
           ],
         ),
       ),
