@@ -49,8 +49,13 @@ class _TransactionFormState extends State<TransactionForm> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      child: Column(children: [
-        Column(
+      child: Padding(
+        padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom),
+        child: Column(
           children: [
             TextField(
               controller: _titleController,
@@ -98,8 +103,8 @@ class _TransactionFormState extends State<TransactionForm> {
               ],
             )
           ],
-        )
-      ]),
+        ),
+      ),
     );
   }
 }
